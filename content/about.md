@@ -1,3 +1,7 @@
+---
+title: About Content v2
+---
+
 # About Content v2
 
 ```mermaid
