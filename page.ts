@@ -1,9 +1,14 @@
 import MarkdownIt from "https://esm.sh/markdown-it@13"
-import mathjax from "https://esm.sh/markdown-it-mathjax@4"
+import mathjax from "https://esm.sh/markdown-it-mathjax3@4"
 import anchor from "https://esm.sh/markdown-it-anchor@8"
 import footnote from "https://esm.sh/markdown-it-footnote@3"
 import highlightjs from "https://esm.sh/markdown-it-highlightjs@4"
-import wikilinks from "https://esm.sh/markdownit-it-wikilinks@1"
+import wikilinks from "https://esm.sh/markdown-it-wikilinks@1"
+
+import * as MediaType from "https://deno.land/x/media_types@v2.3.7/mod.ts";
+import * as Eta from "https://deno.land/x/eta@v1.12.3/mod.ts";
+import * as Yaml  from "https://deno.land/std@0.114.0/encoding/yaml.ts";
+import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
 
 const markdownIt = MarkdownIt()
     .use(mathjax)
@@ -11,11 +16,6 @@ const markdownIt = MarkdownIt()
     .use(footnote)
     .use(highlightjs)
     .use(wikilinks)
-
-import * as MediaType from "https://deno.land/x/media_types@v2.3.7/mod.ts";
-import * as Eta from "https://deno.land/x/eta@v1.12.3/mod.ts";
-import * as Yaml  from "https://deno.land/std@0.114.0/encoding/yaml.ts";
-import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
 
 const { pathname: dirname } = new URL('.', import.meta.url)
 
