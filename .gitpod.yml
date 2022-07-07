@@ -2,6 +2,9 @@
 image:
   file: .gitpod.Dockerfile
 
+tasks:
+  - init: deno cache page.tsx
+
 vscode:
   extensions:
     - denoland.vscode-deno
