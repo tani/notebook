@@ -23,6 +23,8 @@ function Layout(props: { children?: string, meta: Record<string, string | undefi
         <link rel="stylesheet" href="/assets/sakura.css" />
       </head>
       <body>
+        <h1><a href="/">Notepad</a>/ {props.meta.title}</h1>
+        <hr />
         {props.children}
       </body>
     </html>
