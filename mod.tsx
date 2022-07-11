@@ -1,3 +1,8 @@
+/** @jsx jsx */
+/// <reference no-default-lib="true"/>
+/// <reference lib="dom" />
+/// <reference lib="deno.ns" />
+
 import MarkdownIt from "https://esm.sh/markdown-it@12?bundle";
 import mathjax from "https://esm.sh/markdown-it-mathjax3@4?bundle";
 import anchor from "https://esm.sh/markdown-it-anchor@8?bundle";
@@ -7,8 +12,8 @@ import wikilinks from "https://esm.sh/markdown-it-wikilinks@1?bundle";
 import frontmatter from "http://esm.sh/markdown-it-front-matter@0.2.3?bundle";
 import YAML from "https://esm.sh/yaml@2?bundle"
 
-import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
-import { Hono, jsx, serveStatic } from "https://deno.land/x/hono@v1.6.2/mod.ts";
+import { serve } from "https://deno.land/std@0.147.0/http/server.ts";
+import { Hono, jsx, serveStatic } from "https://deno.land/x/hono@v1.6.4/mod.ts";
 
 function Layout(props: { children?: string, meta: Record<string, string | undefined> }) {
   return (
@@ -20,6 +25,8 @@ function Layout(props: { children?: string, meta: Record<string, string | undefi
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={props.meta.description} />
         <title>Notebook/ {props.meta.title}</title>
+        {/* https://freesvg.org/cup-of-coffee-black-and-white-vector */}
+        <link rel="icon" href="/assets/favicon.png" />
         <link rel="stylesheet" href="/assets/github.css" />
         <link rel="stylesheet" href="/assets/sakura.css" />
       </head>
@@ -54,6 +61,6 @@ app.get("/:filename{\\w+\\.html}", async (c) => {
     </Layout>,
   );
 });
-app.get("/*", serveStatic({ root: import.meta.url.pathname }));
+app.get("/*", serveStatic({ root: '.' }));
 
 serve((req) => app.fetch(req));
