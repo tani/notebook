@@ -6,7 +6,7 @@ import highlightjs from "https://esm.sh/markdown-it-highlightjs@4?bundle";
 import wikilinks from "https://esm.sh/markdown-it-wikilinks@1?bundle";
 import frontmatter from "http://esm.sh/markdown-it-front-matter@0.2.3?bundle";
 
-import * as YAML from "https://deno.land/x/yaml@v2.1.1/src/index.ts"
+import * as YAML from "https://esm.sh/yaml@2"
 import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
 import { Hono, jsx, serveStatic } from "https://deno.land/x/hono@v1.6.2/mod.ts";
 
