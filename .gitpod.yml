@@ -1,9 +1,5 @@
-
-image:
-  file: .gitpod.Dockerfile
-
 tasks:
-  - init: brew install && deno cache page.tsx
+  - init: brew install && deno cache mod.tsx
 
 vscode:
   extensions:

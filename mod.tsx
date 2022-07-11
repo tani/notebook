@@ -1,29 +1,30 @@
-import MarkdownIt from "https://esm.sh/markdown-it@13";
+import MarkdownIt from "https://esm.sh/markdown-it@12?bundle";
 import mathjax from "https://esm.sh/markdown-it-mathjax3@4?bundle";
 import anchor from "https://esm.sh/markdown-it-anchor@8?bundle";
 import footnote from "https://esm.sh/markdown-it-footnote@3?bundle";
 import highlightjs from "https://esm.sh/markdown-it-highlightjs@4?bundle";
 import wikilinks from "https://esm.sh/markdown-it-wikilinks@1?bundle";
 import frontmatter from "http://esm.sh/markdown-it-front-matter@0.2.3?bundle";
+import YAML from "https://esm.sh/yaml@2?bundle"
 
-import * as YAML from "https://esm.sh/yaml@2"
 import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
 import { Hono, jsx, serveStatic } from "https://deno.land/x/hono@v1.6.2/mod.ts";
 
 function Layout(props: { children?: string, meta: Record<string, string | undefined> }) {
   return (
+    `<!doctype html>` +
     <html>
       <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={props.meta.description} />
-        <title>{props.meta.title}</title>
+        <title>Notebook/ {props.meta.title}</title>
         <link rel="stylesheet" href="/assets/github.css" />
         <link rel="stylesheet" href="/assets/sakura.css" />
       </head>
       <body>
-        <h1><a href="/">Notepad</a>/ {props.meta.title}</h1>
+        <h1><a href="/">Notebook</a>/ {props.meta.title}</h1>
         <hr />
         {props.children}
       </body>
@@ -32,9 +33,8 @@ function Layout(props: { children?: string, meta: Record<string, string | undefi
 }
 
 const app = new Hono();
-app.get("/", (c) => (c.redirect("/docs/index.html")));
-app.get("/assets/:filename", serveStatic({ root: "./" }));
-app.get("/docs/:filename", async (c) => {
+app.get("/", (c) => (c.redirect("/index.html")));
+app.get("/:filename{\\w+\\.html}", async (c) => {
   let meta: Record<string, string> = {}
   const markdownIt = MarkdownIt()
     .use(mathjax)
@@ -46,7 +46,7 @@ app.get("/docs/:filename", async (c) => {
       meta = YAML.parse(fm)
     });
   const filename = c.req.param("filename").replace(/\.html$/, ".md");
-  const markdown = await Deno.readTextFile("./docs/" + filename);
+  const markdown = await Deno.readTextFile(new URL(filename, import.meta.url));
   const html = markdownIt.render(markdown);
   return c.html(
     <Layout meta={meta}>
@@ -54,5 +54,6 @@ app.get("/docs/:filename", async (c) => {
     </Layout>,
   );
 });
+app.get("/*", serveStatic({ root: import.meta.url.pathname }));
 
 serve((req) => app.fetch(req));
