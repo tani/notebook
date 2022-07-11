@@ -26,7 +26,7 @@ function Layout(props: { children?: string, meta: Record<string, string | undefi
         <meta name="description" content={props.meta.description} />
         <title>Notebook/ {props.meta.title}</title>
         {/* https://freesvg.org/cup-of-coffee-black-and-white-vector */}
-        <link rel="icon" href="/assets/favicon.png" />
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
         <link rel="stylesheet" href="/assets/github.css" />
         <link rel="stylesheet" href="/assets/sakura.css" />
       </head>
