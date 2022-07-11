@@ -1,5 +1,6 @@
 tasks:
-  - init: brew install && deno cache mod.tsx
+  - command: brew install deno
+  - command: deno cache mod.tsx
 
 vscode:
   extensions:
