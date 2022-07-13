@@ -1,7 +1,7 @@
 ---
-title: Index
+title: ようこそ
 ---
 
-# Index 
+# 目次
 
-- 
+- [[Introduction]] -- わたしについて
