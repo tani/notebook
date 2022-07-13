@@ -4,4 +4,4 @@ title: ようこそ
 
 # 目次
 
-- [わたしについて](./Introduciton.html)
+- [わたしについて](./introduciton.html)
