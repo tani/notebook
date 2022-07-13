@@ -4,4 +4,4 @@ title: ようこそ
 
 # 目次
 
-- [[Introduction]] -- わたしについて
+- [わたしについて](./Introduciton.html)
