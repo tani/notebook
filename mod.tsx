@@ -13,7 +13,7 @@ import frontmatter from "http://esm.sh/markdown-it-front-matter@0.2.3?bundle";
 import YAML from "https://esm.sh/yaml@2?bundle"
 
 import { serve } from "https://deno.land/std@0.147.0/http/server.ts";
-import { Hono, jsx, serveStatic } from "https://deno.land/x/hono@v1.6.4/mod.ts";
+import { Hono, jsx, serveStatic } from "https://deno.land/x/hono@v1.6.5-0/mod.ts";
 
 function Layout(props: { children?: string, meta: Record<string, string | undefined> }) {
   return (
