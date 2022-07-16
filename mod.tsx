@@ -42,7 +42,6 @@ function Layout(props: { children?: string, meta: Record<string, string | undefi
 }
 
 const app = new Hono();
-app.use("*", compress());
 app.get("/", (c) => (c.redirect("/index.html")));
 app.get("/:filename{\\w+\\.html}", async (c) => {
   let meta: Record<string, string> = {}
