@@ -13,7 +13,9 @@ import frontmatter from "http://esm.sh/markdown-it-front-matter@0.2.3?bundle";
 import YAML from "https://esm.sh/yaml@2?bundle"
 
 import { serve } from "https://deno.land/std@0.147.0/http/server.ts";
-import { Hono, jsx, serveStatic } from "https://deno.land/x/hono@v1.6.5-0/mod.ts";
+import { Hono } from "https://deno.land/x/hono@v2.0.0/mod.ts";
+import { jsx, serveStatic, compress } from 'https://deno.land/x/hono@v2.0.0/middleware.ts'
+
 
 function Layout(props: { children?: string, meta: Record<string, string | undefined> }) {
   return (
@@ -40,6 +42,7 @@ function Layout(props: { children?: string, meta: Record<string, string | undefi
 }
 
 const app = new Hono();
+app.use("*", compress());
 app.get("/", (c) => (c.redirect("/index.html")));
 app.get("/:filename{\\w+\\.html}", async (c) => {
   let meta: Record<string, string> = {}
